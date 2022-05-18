@@ -1,0 +1,4 @@
+// summary: 
+class Word{
+   
+}
