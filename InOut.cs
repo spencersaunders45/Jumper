@@ -8,6 +8,8 @@ class InOut
       CreateJumperImage();
    }
 
+
+
    // summary: addes string values to the List
    private void CreateJumperImage()
    {
@@ -20,34 +22,75 @@ class InOut
       _jumperImage.Add(" / \\ ");
    }
 
+
+
    /*
-   summary: Displays the state of the jumper
-   param: the number of wrong guesses
+   summary: Chooses which jumper to display
+   param: (int wrongGuesses) the number of incorrect guesses | (int correctWord) the length of the correct word
    */
-   public void DisplayJumper(int wrongGuesses)
+   public void DisplayJumper(int wrongGuesses, int correctWord)
    {
-      for (int i = wrongGuesses; i < _jumperImage.Count - wrongGuesses; i++)
+      if (wrongGuesses == correctWord)
+      {
+         DeadJumper();
+      }
+      else
+      {
+         AliveJumper(wrongGuesses);
+      }
+   }
+
+
+
+   /*
+   summary: Displays the jumper when guesses remain
+   param: (int wrongGuesses) the number of incorrect guesses
+   */
+   private void AliveJumper(int wrongGuesses)
+   {
+      for (int i = wrongGuesses; i < _jumperImage.Count; i++)
       {
          Console.WriteLine(_jumperImage[i]);
       }
-      Console.Write("\n\n");
+      Console.Write("\n");
       Console.WriteLine("^^^^^^^");
    }
 
+
+
    /*
-   summary: 
-   param:
+   summary: Displays the jumper when no guesses remain
+   */
+   private void DeadJumper()
+   {
+      Console.WriteLine("  x  ");
+      Console.WriteLine(" /|\\ ");
+      Console.WriteLine(" / \\ ");
+      Console.Write("\n");
+      Console.WriteLine("^^^^^^^");
+   }
+
+
+
+   /*
+   summary: Gets the users guess
+   return: (string) returns a single letter
    */
    public string GuessLetter()
    {
-      Console.Write("Guess a letter [a-z]: ");
-      string guess = Console.ReadLine();
+      string guess = String.Empty;
+      do{
+         Console.Write("Guess a letter [a-z]: ");
+         guess = Console.ReadLine();
+      } while (guess == null || guess.Length != 1);
       return guess;
    }
 
+
+
    /*
-   summary: Displays the partly or fully completed word
-   param: the partly completed word
+   summary: Displays the state of the current guesses word
+   param: (string word) the guesses word
    */
    public void DisplayWord(string word)
    {
