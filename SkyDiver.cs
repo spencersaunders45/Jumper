@@ -24,7 +24,7 @@ class SkyDiver
    /*
    summary: Updates the value of _wrongGuesses
    */
-   public void SetWrongGuesses()
+   public void WrongGuess()
    {
       _wrongGuesses++;
    }
@@ -37,6 +37,13 @@ class SkyDiver
    */
    public bool CheckShoot(Word word)
    {
-      if ()
+      if (word.WordLength() - 1 == _wrongGuesses)
+      {
+         return true;
+      }
+      else
+      {
+         return false;
+      }
    }
 }

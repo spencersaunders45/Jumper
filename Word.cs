@@ -11,7 +11,7 @@ class Word
    // summary: Constructor initializes the word for the game
    public Word()
    {
-      _word = _wordList[_random.Next(_wordList.Length + 1)];
+      _word = _wordList[_random.Next(_wordList.Length)];
       _wordArray = _word.ToCharArray();
    }
 
@@ -22,12 +22,12 @@ class Word
    param: (string guess) the letter guessed by the user
    return: (bool) returns if the guess was correct or not
    */
-   public bool CheckGuess(string guess, string word)
+   public bool CheckGuess(string guess)
    {
       bool correctGuess = false;
       for (int i = 0; i < _wordArray.Length; i++)
       {
-         if (guess.Equals(_wordArray[i]))
+         if (guess.Equals(Convert.ToString(_wordArray[i])))
          {
             correctGuess = true;
          }
@@ -44,12 +44,13 @@ class Word
    */
    public string AddLetter(string word, string guess)
    {
+      char guessChar = char.Parse(guess);
       char[] guessArray = word.ToCharArray();
       for (int i = 0; i < _wordArray.Length; i++)
       {
-         if (guess.Equals(_wordArray[i]))
+         if (guess.Equals(Convert.ToString(_wordArray[i])))
          {
-            guessArray[i * 2] = Convert.ToChar(guess);
+            guessArray[i * 2] = guessChar;
          }
       }
       string updatedWord = new string(guessArray);
@@ -74,5 +75,43 @@ class Word
          guessWord += "_ ";
       }
       return guessWord;
+   }
+
+
+
+   /*
+   summary: Share the length of the word
+   return: (int) returns the length of the word
+   */
+   public int WordLength()
+   {
+      return _word.Length;
+   }
+
+   /*
+   summary: Check if the word is complete
+   return: (bool) returns true if the word is complete
+   */
+   public bool IsComplete(string guessWord)
+   {
+      for (int i = 0; i < guessWord.Length; i+=2)
+      {
+         
+         if (guessWord[i].Equals('_'))
+         {
+            return false;
+         }
+      }
+      return true;
+   }
+
+
+
+   /*
+   ! DELETE THIS
+   */
+   public void DisplayWord()
+   {
+      Console.WriteLine(_word);
    }
 }

@@ -1,3 +1,5 @@
+//summary: 
+
 class InOut
 {
    List<string> _jumperImage;
@@ -26,11 +28,12 @@ class InOut
 
    /*
    summary: Chooses which jumper to display
-   param: (int wrongGuesses) the number of incorrect guesses | (int correctWord) the length of the correct word
+   param: (SkyDiver skyDiver) an object of SkyDiver | (Word word) an object of Word
    */
-   public void DisplayJumper(int wrongGuesses, int correctWord)
+   public void DisplayJumper(SkyDiver skyDiver, Word word)
    {
-      if (wrongGuesses == correctWord)
+      int wrongGuesses = skyDiver.GetWrongGuesses();
+      if (wrongGuesses == word.WordLength() - 1)
       {
          DeadJumper();
       }
@@ -95,5 +98,6 @@ class InOut
    public void DisplayWord(string word)
    {
       Console.WriteLine(word);
+      Console.WriteLine();
    }
 }
